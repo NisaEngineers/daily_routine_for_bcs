@@ -2,6 +2,12 @@ PLAN = {
     # Sept 29
     "2025-09-29": [
         ("01:55", "ল্যাপটপ বের করুন এবং মোনারক এর কাজ করুন আগামি ২ ঘণ্টা"),
+        ("02:00", "এটা ই আগামি বেশ কিছুদিনের জন্য সর্বশেষ পোঁপোঁ,  সংযমী হউন"),
+        ("02:28", "Go and Eat Light Dinner"),
+        ("02:45", "Make your table with laptop and create reading enviroment"),
+        ("03:13", "Popo Time Popo Time, Enjoy"),
+        ("04:35", "Do 3 Set Pull Ups and maximum quality reps, forward and backword bend, Side twisting"),
+        ("04:50", "Take Light Bath"),
         ("05:30", "সি প্রোগ্রামিং এবং পয়েন্টারস। মনোযোগ দিয়ে পড়ুন।"),
         ("07:00", "Gym and commute. Stay energized."),
         ("09:15", "Data structures: arrays, stacks, queues. Focus deeply."),
