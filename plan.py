@@ -1,142 +1,134 @@
+from syl_cse import syllabus_cse
+from syl_gen import syllabus_general
+
+# Helper to render subtopics from a syllabus dict
+def topics(syl: dict, subject: str, indices):
+    items = syl[subject]["subtopics"]
+    if isinstance(indices, slice):
+        picked = items[indices]
+    elif isinstance(indices, (list, tuple)):
+        picked = [items[i] for i in indices]
+    else:
+        picked = [items[indices]]
+    return "; ".join(picked)
+
+# If your exam time differs, update these:
+EXAM_REPORTING = "08:30"      # Reporting window (confirm on admit card)
+EXAM_START = "10:00"          # Exam start (placeholder)
+EXAM_END = "12:00"            # Exam end (placeholder)
+
 PLAN = {
-    # Sept 29
-    "2025-09-29": [
-        ("03:45", "Start working for monaarch up 0430 hours"),
-        ("04:35", "Do 3 Set Pull Ups and maximum quality reps, forward and backword bend, Side twisting"),
-        ("04:50", "Take Light Bath"),
-        ("05:30", "সি প্রোগ্রামিং এবং পয়েন্টারস। মনোযোগ দিয়ে পড়ুন।"),
-        ("07:00", "Gym and commute. Stay energized."),
-        ("09:15", "Data structures: arrays, stacks, queues. Focus deeply."),
-        ("11:15", "Coding or system design. One hour."),
-        ("13:00", "বাংলা সাহিত্য: রবীন্দ্রনাথ ঠাকুর এবং কাজী নজরুল ইসলাম।"),
-        ("15:30", "Mental ability practice: series and analogy."),
-        ("16:30", "Algorithms: complexity and divide and conquer."),
-        ("19:00", "বাংলা ব্যাকরণ: সমাস, সন্ধি, অলঙ্কার।"),
-        ("20:00", "Numerical Analysis lecture and notes review."),
-        ("21:30", "Wind down. Prepare tomorrow’s plan."),
-    ],
-
-    # Sept 30
-    "2025-09-30": [
-        ("05:30", "Trees, heaps, and Huffman coding."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Algorithms: sorting and hashing."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "English literature: Shakespeare and the Romantics."),
-        ("15:30", "Mental ability: reasoning puzzles."),
-        ("16:30", "ডিজিটাল সিস্টেম: বুলিয়ান বীজগণিত এবং কার্নো মানচিত্র।"),
-        ("19:00", "English grammar: voice, narration, error spotting."),
-        ("20:00", "Digital Logic lecture and revision."),
-        ("21:30", "Wind down. Light review."),
-    ],
-
-    # Oct 1
+    # Oct 1 — starts 02:30 today
     "2025-10-01": [
-        ("05:30", "Graphs: BFS, DFS, shortest paths."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Microprocessor: 8086 architecture and addressing modes."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "বাংলাদেশ বিষয়াবলি: সংবিধান এবং মুক্তিযুদ্ধ।"),
-        ("15:30", "Math practice: algebra and probability."),
-        ("16:30", "Batch MCQ: Numerical Analysis."),
-        ("19:00", "Quick recall: math formulas."),
-        ("20:00", "Review Numerical Analysis mistakes."),
-        ("21:30", "Wind down."),
+        ("02:30", "Monaarch work sprint until 04:30"),
+        ("04:35", "Calisthenics: pull-ups, forward/back bend, side twist"),
+        ("04:50", "Light bath"),
+        ("05:30", f"CS — Data Structures: {topics(syllabus_cse, 'Data Structures', slice(0,3))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — Algorithm: {topics(syllabus_cse, 'Algorithm', slice(0,2))}"),
+        ("11:15", "Coding/system design (1h)"),
+        ("13:00", f"General — বাংলাদেশ বিষয়াবলি: {topics(syllabus_general, 'বাংলাদেশ বিষয়াবলি', 6)}"),
+        ("15:30", f"General — গাণিতিক যুক্তি: {topics(syllabus_general, 'গাণিতিক যুক্তি', 1)}"),
+        ("16:30", f"CS — Numerical Analysis MCQ: {topics(syllabus_cse, 'Numerical Analysis', 0)}"),
+        ("19:00", "Quick recall — core math formulas"),
+        ("20:00", f"CS — Numerical Analysis review: {topics(syllabus_cse, 'Numerical Analysis', 2)}"),
+        ("21:30", "Wind down, set priorities for tomorrow"),
     ],
 
     # Oct 2
     "2025-10-02": [
-        ("05:30", "Microprocessor: interrupts and memory management."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Operating Systems: processes, scheduling, deadlocks."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "English literature: Victorians and Moderns."),
-        ("15:30", "Mental ability: puzzles and arrangements."),
-        ("16:30", "Batch MCQ: Compiler Design."),
-        ("19:00", "ইংরেজি ব্যাকরণ পুনরাবৃত্তি।"),
-        ("20:00", "Compiler notes quick pass."),
-        ("21:30", "Wind down."),
+        ("05:30", f"CS — Microprocessor: {topics(syllabus_cse, 'Microprocessor and Interfacing', slice(3,6))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — Operating System: {topics(syllabus_cse, 'Operating System', slice(1,4))}"),
+        ("11:15", "Coding/system design (1h)"),
+        ("13:00", f"General — English literature: {topics(syllabus_general, 'English', -1)}"),
+        ("15:30", f"General — মানসিক দক্ষতা: {topics(syllabus_general, 'মানসিক দক্ষতা', 1)}"),
+        ("16:30", f"CS — Compiler & TOC MCQ: {topics(syllabus_cse, 'Compiler and Theory of Computation', 0)}"),
+        ("19:00", f"General — English grammar: {topics(syllabus_general, 'English', 3)}"),
+        ("20:00", f"CS — Compiler pass: {topics(syllabus_cse, 'Compiler and Theory of Computation', 3)}"),
+        ("21:30", "Wind down"),
     ],
 
     # Oct 3
     "2025-10-03": [
-        ("05:30", "Operating Systems: memory, paging, file systems."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "DBMS: ER model, normalization, SQL basics."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "বাংলাদেশ বিষয়াবলি: অর্থনীতি এবং আইসিটি নীতি।"),
-        ("15:30", "Math: geometry and shortcuts."),
-        ("16:30", "Final Model Test 01 (CSE 971)."),
-        ("19:00", "Review model test mistakes."),
-        ("20:00", "Soft pass over weak CS topics."),
-        ("21:30", "Wind down."),
+        ("05:30", f"CS — Operating System: {topics(syllabus_cse, 'Operating System', slice(4,6))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — DBMS: {topics(syllabus_cse, 'Database Management System', slice(1,4))}"),
+        ("11:15", "Coding/system design (1h)"),
+        ("13:00", f"General — বাংলাদেশ বিষয়াবলি: {topics(syllabus_general, 'বাংলাদেশ বিষয়াবলি', 3)}"),
+        ("15:30", f"General — গাণিতিক যুক্তি: {topics(syllabus_general, 'গাণিতিক যুক্তি', 3)}"),
+        ("16:30", "Final Model Test 01 (CSE 971)"),
+        ("19:00", "Review model test mistakes"),
+        ("20:00", "Soft pass over weak CS topics"),
+        ("21:30", "Wind down"),
     ],
 
     # Oct 4
     "2025-10-04": [
-        ("05:30", "DBMS: transactions, concurrency, indexing, B+ trees."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Software Engineering: SDLC, testing, COCOMO."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "English grammar: articles, prepositions, transformations."),
-        ("15:30", "বাংলা ব্যাকরণ: বাক্য সংশোধন এবং প্রবাদ।"),
-        ("16:30", "Final Model Test 01 (ICT 281)."),
-        ("19:00", "Review mistakes."),
-        ("20:00", "Quick recall: grammar rules."),
-        ("21:30", "Wind down."),
+        ("05:30", f"CS — DBMS: {topics(syllabus_cse, 'Database Management System', slice(5,7))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — Software Engineering: {topics(syllabus_cse, 'Software Engineering', slice(0,3))}"),
+        ("11:15", "Coding/system design (1h)"),
+        ("13:00", f"General — English grammar: {topics(syllabus_general, 'English', 4)}"),
+        ("15:30", f"General — বাংলা ভাষা/ব্যাকরণ: {topics(syllabus_general, 'বাংলা', 0)}"),
+        ("16:30", "Final Model Test 01 (ICT 281)"),
+        ("19:00", "Review mistakes"),
+        ("20:00", "Quick recall: grammar rules"),
+        ("21:30", "Wind down"),
     ],
 
     # Oct 5
     "2025-10-05": [
-        ("05:30", "Compiler & TOC: lexical, syntax, semantic analysis."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Compiler: code generation, optimization, automata."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "আন্তর্জাতিক বিষয়াবলি: জাতিসংঘ, নোবেল পুরস্কার, ভূ-রাজনীতি।"),
-        ("15:30", "English vocabulary: high-frequency words."),
-        ("16:30", "Final Model Test 02 (CSE 971)."),
-        ("19:00", "Review mistakes and flashcards."),
-        ("20:00", "Fix weak CS areas."),
-        ("21:30", "Wind down."),
+        ("05:30", f"CS — Compiler & TOC: {topics(syllabus_cse, 'Compiler and Theory of Computation', slice(0,3))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — Compiler: {topics(syllabus_cse, 'Compiler and Theory of Computation', slice(3,5))}"),
+        ("11:15", "Coding/system design (1h)"),
+        ("13:00", f"General — আন্তর্জাতিক বিষয়াবলি: {topics(syllabus_general, 'আন্তর্জাতিক বিষয়াবলি', slice(0,3))}"),
+        ("15:30", "General — English vocabulary (HF words, transformations)"),
+        ("16:30", "Final Model Test 02 (CSE 971)"),
+        ("19:00", "Review mistakes and refresh flashcards"),
+        ("20:00", "Fix weak CS areas (targeted drills)"),
+        ("21:30", "Wind down"),
     ],
 
     # Oct 6
     "2025-10-06": [
-        ("05:30", "Numerical Analysis: Gauss elimination, interpolation."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Numerical Analysis: differentiation, integration, Newton-Raphson."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "বাংলা সাহিত্য ও ইংরেজি ব্যাকরণ দ্রুত পুনরাবৃত্তি।"),
-        ("15:30", "Mental ability mixed sets."),
-        ("16:30", "Final Model Test 02 (ICT 281)."),
-        ("19:00", "Review mistakes."),
-        ("20:00", "Formula sheet consolidation."),
-        ("21:30", "Wind down."),
+        ("05:30", f"CS — Numerical Analysis: {topics(syllabus_cse, 'Numerical Analysis', slice(0,2))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — Numerical Analysis: {topics(syllabus_cse, 'Numerical Analysis', slice(2,4))}"),
+        ("11:15", "Coding/system design (1h)"),
+        ("13:00", f"General — বাংলা ও English quick revision: {topics(syllabus_general, 'বাংলা', 1)}; {topics(syllabus_general, 'English', slice(0,2))}"),
+        ("15:30", f"General — মানসিক দক্ষতা: mixed sets ({topics(syllabus_general, 'মানসিক দক্ষতা', slice(0,6))})"),
+        ("16:30", "Final Model Test 02 (ICT 281)"),
+        ("19:00", "Review mistakes thoroughly"),
+        ("20:00", "Formula sheet consolidation (math, NA, OS)"),
+        ("21:30", "Wind down"),
     ],
 
     # Oct 7
     "2025-10-07": [
-        ("05:30", "Data Communication: OSI, TCP/IP, encoding, modulation."),
-        ("07:00", "Gym and commute."),
-        ("09:15", "Networking: IP, routing, TCP/UDP, security, DNS/HTTP."),
-        ("11:15", "Coding or system design."),
-        ("13:00", "বাংলাদেশ ও আন্তর্জাতিক বিষয়াবলি: সাম্প্রতিক ঘটনা।"),
-        ("15:30", "Bangla grammar and English vocabulary quick drills."),
-        ("16:30", "Final Model Test 03 (CSE 971)."),
-        ("19:00", "Review mistakes."),
-        ("20:00", "Light recap of tough CS topics."),
-        ("21:30", "Wind down."),
+        ("05:30", f"CS — Data Communication: {topics(syllabus_cse, 'Data Communication', slice(0,4))}"),
+        ("07:00", "Gym and commute"),
+        ("09:15", f"CS — Networking: {topics(syllabus_cse, 'Computer Network and the Internet', slice(0,5))}"),
+        ("11:15", "Coding/system design (light)"),
+        ("13:00", f"General — বাংলাদেশ/আন্তর্জাতিক: {topics(syllabus_general, 'বাংলাদেশ বিষয়াবলি', slice(8,9))}; {topics(syllabus_general, 'আন্তর্জাতিক বিষয়াবলি', 2)}"),
+        ("15:30", "General — Bangla grammar + English vocab quick drills"),
+        ("16:30", "Final Model Test 03 (CSE 971)"),
+        ("19:00", "Review mistakes"),
+        ("20:00", "Light recap of tough CS topics (OS/DBMS/µP)"),
+        ("21:30", "Wind down"),
     ],
 
-    # Oct 8
+    # Oct 8 — Exam day (confirm timings with admit card)
     "2025-10-08": [
-        ("05:30", "CS rapid-fire: DS, algorithms, OS, DBMS, microprocessor, networking."),
-        ("07:30", "Short walk, calm prep."),
-        ("09:15", "CS rapid-fire continues."),
-        ("11:15", "Coding pause: light note tidying."),
-        ("13:00", "বাংলা ও ইংরেজি ব্যাকরণ, গণিত সূত্র, সাম্প্রতিক বিষয়াবলি দ্রুত পুনরাবৃত্তি।"),
-        ("16:30", "Final Model Test 03 (ICT 281)."),
-        ("19:00", "Cheat sheet pass. Confidence build."),
-        ("20:00", "Early wind down and sleep prep."),
+        ("05:30", f"CS rapid-fire: {topics(syllabus_cse, 'Data Structures', slice(0,5))}; {topics(syllabus_cse, 'Algorithm', slice(0,4))}"),
+        ("07:30", "Short walk, calm prep, hydration"),
+        ("08:30", f"Arrive at center; reporting window begins (planned {EXAM_REPORTING})"),
+        ("10:00", f"BCS Special Preli — Exam start (planned {EXAM_START})"),
+        ("12:00", f"Exam end (planned {EXAM_END})"),
+        ("13:30", "Decompress; light meal; brief reflection (no post-mortem yet)"),
+        ("16:30", "If ICT paper later in day, quick grammar/math scan; else rest"),
+        ("19:00", "Cheat sheet pass (only if next paper remains)"),
+        ("20:00", "Early wind down and sleep prep"),
     ],
 }
