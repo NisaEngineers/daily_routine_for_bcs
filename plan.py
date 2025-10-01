@@ -19,12 +19,9 @@ EXAM_END = "12:00"            # Exam end (placeholder)
 
 PLAN = {
     # Oct 1 — starts 02:30 today
-    "2025-10-01": [
-        ("02:30", "Monaarch work sprint until 04:30"),
-        ("04:35", "Calisthenics: pull-ups, forward/back bend, side twist"),
-        ("04:50", "Light bath"),
-        ("05:30", f"CS — Data Structures: {topics(syllabus_cse, 'Data Structures', slice(0,3))}"),
-        ("07:00", "Gym and commute"),
+    "2025-10-01":  [
+        ("07:30", "Complete Andrew NG Mavhine Learning Specilizaton"),
+        ("08:45", "Gym or 2 sets pull ups x 2 sets chin up"),
         ("09:15", f"CS — Algorithm: {topics(syllabus_cse, 'Algorithm', slice(0,2))}"),
         ("11:15", "Coding/system design (1h)"),
         ("13:00", f"General — বাংলাদেশ বিষয়াবলি: {topics(syllabus_general, 'বাংলাদেশ বিষয়াবলি', 6)}"),
